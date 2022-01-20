@@ -1,0 +1,24 @@
+<table class="table" style="width:50%; margin-top: 50px">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">Title</th>
+    <th scope="col">Publish date</th>
+    <th scope="col">Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <td *ngIf="loading">
+    Loading...
+  </td>
+  <tr *ngFor="let note of notes">
+    <td>{{note.title}}</td>
+    <td>{{note.pubDate}}</td>
+    <td>{{note.description}}</td>
+   <!-- <button class="delete" title="delete hero"
+            (click)="delete(note)">x</button>-->
+  </tr>
+  </tbody>
+
+</table>
+
+<button style="text-align:right;margin-left: 50px">Add note</button>
