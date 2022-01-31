@@ -1,24 +1,45 @@
-<table class="table" style="width:50%; margin-top: 50px">
-  <thead class="thead-dark">
-  <tr>
-    <th scope="col">Title</th>
-    <th scope="col">Publish date</th>
-    <th scope="col">Description</th>
-  </tr>
-  </thead>
-  <tbody>
-  <td *ngIf="loading">
-    Loading...
-  </td>
-  <tr *ngFor="let note of notes">
-    <td>{{note.title}}</td>
-    <td>{{note.pubDate}}</td>
-    <td>{{note.description}}</td>
-   <!-- <button class="delete" title="delete hero"
-            (click)="delete(note)">x</button>-->
-  </tr>
-  </tbody>
+<h3>Your notes:</h3>
+<div>
+  <table style=" width: 50%;
+    float: left;
+    padding: 20px;"
+    class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Publish date</th>
+      <th scope="col">Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <td *ngIf="loading">
+      Loading...
+    </td>
+    <tr *ngFor="let note of notes">
+      <td>{{note.title}}</td>
+      <td>{{note.pubDate}}</td>
+      <td>{{note.description}}
+        <button class="btn btn-outline-dark" style='float: right;' (click)="deleteNote(note.id)">x</button>
+        <button class="btn btn-outline-dark" style='float: right;' (click)="getID(note.id)">Edit</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div style=" width: 50%;float: left;padding: 20px">
+    <div> <h3>Create Note</h3>
+      Title: <input style="width: 15%" #title type="text">
+      Date added: <input  #pubDate type="Date">
+      Description: <input style="width: 25%" #description type="text">
+      <button class="btn btn-outline-dark" style="margin-left: 20px" (click)="createNote(title.value,pubDate.value,description.value)">Create note</button>
+    </div>
+    <hr>
+    <div style="margin-top: 15px">
+      <h3>Update Note</h3>
+      Title: <input style="width: 15%" #titleEdit type="text">
+      Description: <input style="width: 25%" #descriptionEdit type="text">
+      <button class="btn btn-outline-dark" style="margin-left: 20px" (click)="updateNote(id,titleEdit.value,descriptionEdit.value)">Update note</button>
+    </div>
+  </div>
+</div>
 
-</table>
 
-<button style="text-align:right;margin-left: 50px">Add note</button>

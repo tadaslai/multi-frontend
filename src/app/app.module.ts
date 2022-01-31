@@ -9,13 +9,14 @@ import {HttpClientModule} from "@angular/common/http";
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {GraphQLModule} from "./graphql.config";
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     HubComponent,
     LoginComponent,
-    NotesComponent
+    NotesComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -25,7 +26,8 @@ import {GraphQLModule} from "./graphql.config";
     FormsModule,
     AppRoutingModule,
     RouterModule,
-    GraphQLModule
+    GraphQLModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Apollo} from 'apollo-angular'
-import { Note } from "../note";
-import {NotesQueryResponse, NOTES_DESCRIPTION} from "../graphql";
+import {Note} from "../note";
+import {NotesQueryResponse, NOTES_DISPLAY, NOTE_CREATE, NOTE_DELETE, NOTE_UPDATE} from "../graphql";
 
 @Component({
   selector: 'app-notes',
@@ -12,18 +12,62 @@ import {NotesQueryResponse, NOTES_DESCRIPTION} from "../graphql";
 export class NotesComponent implements OnInit {
   notes: Note[] = [];
   loading: boolean = true;
+  id: number = 0;
+  constructor(private apollo: Apollo) {
+  }
 
-  constructor(private apollo: Apollo,) {}
-  /*delete(note: Note): void {
-    this.notes = this.notes.filter(h => h !== note);
-    this.noteService.deleteHero(hero.id).subscribe();
-  }*/
-  ngOnInit(): void {
+  getID(id:number){
+    this.id = id
+  }
+  createNote(title: string, pubDate: string, description: string) {
+    this.apollo.mutate({
+      mutation: NOTE_CREATE,
+      refetchQueries: [{query: NOTES_DISPLAY}],
+      errorPolicy: 'all',
+      variables: {
+        title: title,
+        pub_date: new Date(pubDate),
+        description: description,
+      }
+    }).subscribe()
+  }
+
+  updateNote(id: number, title: string, description: string) {
+    this.apollo.mutate({
+      mutation: NOTE_UPDATE,
+      refetchQueries: [{query: NOTES_DISPLAY}],
+      errorPolicy: 'all',
+      variables: {
+        id: id,
+        title: title,
+        description: description,
+      }
+    }).subscribe()
+  }
+
+  displayNotes() {
     this.apollo.watchQuery<NotesQueryResponse>({
-      query: NOTES_DESCRIPTION })
+      query: NOTES_DISPLAY,
+      errorPolicy: 'all'
+    })
       .valueChanges.subscribe((result) => {
       this.notes = result.data.notes;
       this.loading = result.data.loading;
     })
+  }
+
+  deleteNote(id: number) {
+    this.apollo.mutate({
+      mutation: NOTE_DELETE,
+      refetchQueries: [{query: NOTES_DISPLAY}],
+      errorPolicy: 'all',
+      variables: {
+        id: id,
+      }
+    }).subscribe()
+  }
+
+  ngOnInit(): void {
+    this.displayNotes();
   }
 }
