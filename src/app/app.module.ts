@@ -10,12 +10,18 @@ import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {GraphQLModule} from "./graphql.config";
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
+//import { authInterceptorProviders } from './_helpers/auth.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
     HubComponent,
     LoginComponent,
     NotesComponent,
+    RegisterComponent,
+    ProfileComponent,
 
   ],
   imports: [

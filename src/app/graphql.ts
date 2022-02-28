@@ -12,11 +12,11 @@ export const NOTES_DISPLAY = gql`
   }
 `
 export const NOTE_CREATE = gql`
-  mutation createNote($title: String!, $pubDate: Date="2022-01-01", $description: String!){
-    createNote(input: {title: $title, pubDate: $pubDate, description: $description}) {
+  mutation createNote($title: String!, $description: String!){
+    createNote(input: {title: $title,  description: $description}) {
       note{
+        id
         title
-        pubDate
         description
       }
     }
@@ -37,6 +37,27 @@ export const NOTE_DELETE = gql`
   mutation deleteNote($id: ID!) {
     deleteNote(id: $id) {
       ok
+    }
+  }
+`
+export const USER_LOGIN = gql`
+  mutation loginUser($username: String!, $password: String!){
+    createNote(input: {username: $username, password: $password}) {
+      user{
+        username
+        password
+      }
+    }
+  }
+`
+export const USER_REGISTER = gql`
+  mutation registerUser($username: String!,$email: String! $password: String!){
+    createNote(input: {username: $username, email: $email, password: $password}) {
+      user{
+        username
+        email
+        password
+      }
     }
   }
 `

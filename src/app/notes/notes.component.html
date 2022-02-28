@@ -28,9 +28,8 @@
   <div style=" width: 50%;float: left;padding: 20px">
     <div> <h3>Create Note</h3>
       Title: <input style="width: 15%" #title type="text">
-      Date added: <input  #pubDate type="Date">
       Description: <input style="width: 25%" #description type="text">
-      <button class="btn btn-outline-dark" style="margin-left: 20px" (click)="createNote(title.value,pubDate.value,description.value)">Create note</button>
+      <button class="btn btn-outline-dark" style="margin-left: 20px" (click)="createNote(title.value,description.value)">Create note</button>
     </div>
     <hr>
     <div style="margin-top: 15px">
